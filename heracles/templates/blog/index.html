@@ -1,0 +1,54 @@
+{% extends '_base.html' %}
+
+{% block title %}Blog - Avalon{% endblock %}
+
+{% block script %}
+{{ super() }}
+<script type="text/javascript" src="{{ static_file('js/heracles/blog.js') }}"></script>
+{% endblock %}
+
+{% block style %}
+<link href="{{ static_file('css/heracles/index.css') }}" rel="stylesheet" type="text/css"/>
+<link href="{{ static_file('css/heracles/blog_font.css') }}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block content %}
+<div class="page">
+    {% include 'blog/blog_header.html' %}
+    <div class="main">
+        {% for blog in blog_list %}
+        <div class="blog">
+            <h3><a href="{{ url_for('heracles:www.blog', blog_id=blog.id) }}">{{ blog.title }}</a></h3>
+            <span class="blog-time">{{ blog.date_created }}</span>
+            <div class="text">
+                {{ blog.summary }}
+            </div>
+            <div class="meta">
+                {% if blog.tags %}
+                <div class="tag-list pull-left">
+                    <p>
+                        <span class="tags-icon glyphicon glyphicon-tags"></span>
+                        {% for tag in blog.tags %}
+                        <a href="">{{ tag.title }}</a>
+                        {% endfor %}
+                    </p>
+                </div>
+                {% endif %}
+                <div class="read-more"><a href="{{ url_for('heracles:www.blog', blog_id=blog.id) }}">Read more &#8594;</a></div>
+            </div>
+        </div>
+        {% endfor %}
+        {{ pager() }}
+    </div>
+    <div class="footer">
+        © Scripta 2014<br/><a href="http://creativemarket.com/maketheweb">Scripta Theme</a> by <a href="http://maketheweb.pl">MakeTheWeb</a>
+    </div>
+</div>
+{% endblock %}
+

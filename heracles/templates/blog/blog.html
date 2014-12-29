@@ -1,0 +1,49 @@
+{% extends '_base.html' %}
+
+{% block title %}{{ blog.title }} - Blog - Avalon{% endblock %}
+
+{% block script %}
+{{ super() }}
+<script type="text/javascript" src="{{ static_file('js/heracles/blog.js') }}"></script>
+{% endblock %}
+
+{% block style %}
+<link href="{{ static_file('css/heracles/blog_font.css') }}" rel="stylesheet" type="text/css"/>
+<link href="{{ static_file('css/heracles/index.css') }}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block content %}
+{% set user = user_meta %}
+<div class="page">
+    {% include 'blog/blog_header.html' %}
+    <div class="main">
+        <div class="blog-detail">
+            <h3>{{ blog.title }}</a></h3>
+            <span class="blog-time">{{ blog.date_created }}</span>
+            {% if blog.tags %}
+            <div class="tag-list tag-list-top">
+                <p>
+                    <span class="tags-icon glyphicon glyphicon-tags"></span>
+                    {% for tag in blog.tags %}
+                    <a href="">{{ tag.title }}</a>
+                    {% endfor %}
+                </p>
+            </div>
+            {% endif %}
+            <div class="text">
+                {{ blog.html }}
+            </div>
+        </div>
+        {% include "share.html" %}
+    </div>
+    <div class="footer">
+        © Scripta 2014<br/><a href="http://creativemarket.com/maketheweb">Scripta Theme</a> by <a href="http://maketheweb.pl">MakeTheWeb</a>
+    </div>
+</div>
+{% endblock %}

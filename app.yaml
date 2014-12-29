@@ -1,0 +1,17 @@
+# Multiple app config
+DEVELOPMENT: &dev
+    APP_NAME: 'heracles'
+    APP_TYPE: 'app'
+    APP_BASE: 'bottle'
+    MODULE: 'heracles:app'
+    DEBUG: true
+
+    CONTENT_PATH: 'templates/'
+
+STAGING:
+    <<: *dev
+
+PRODUCTION:
+    <<: *dev
+    DEBUG: false
+    MAIL_DEBUG: false
