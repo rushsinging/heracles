@@ -24,4 +24,4 @@ class BlogEditView(MethodView):
         else:
             blog = BlogModel()
 
-        return
+        return redirect(url('heracles:www.blog', blog_id=blog.id))

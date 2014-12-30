@@ -37,7 +37,7 @@
             </div>
             {% endif %}
             <div class="text">
-                {{ blog.html }}
+                {{ blog.html|safe }}
             </div>
         </div>
         {% include "share.html" %}

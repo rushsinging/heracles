@@ -22,7 +22,9 @@ def upgrade():
         sa.Column('hashkey', sa.String(128), primary_key=True),
         sa.Column('parent_id', sa.Integer(),),
         sa.Column('content', sa.Unicode()),
-        sa.Column('html', sa.Unicode()))
+        sa.Column('html', sa.Unicode()),
+        sa.Column('content_type', sa.String(8))
+    )
 
     op.create_table(
         'tag',

@@ -1,11 +1,14 @@
 #-*- coding: utf-8 -*-
-from bottle import redirect, url
+from bottle import url, request
 
 from share.framework.bottle import MethodView, view
 from share.framework.bottle import Pager
 from share.framework.bottle import signin_required
 
+from share.framework.bottle.engines import db
+
 from heracles.models import BlogModel
+from .forms import BlogEditForm
 
 
 class BlogIndexView(MethodView):
@@ -42,9 +45,24 @@ class BlogEditView(MethodView):
         return dict(blog=blog)
 
     def post(self, blog_id):
-        if blog_id:
-            blog = BlogModel.query.get(blog_id)
-        else:
-            blog = BlogModel()
+        form = BlogEditForm(request.forms)
+        if not form.validate():
+            print form.errors
+            return {}
 
-        return redirect(url('heracles:www.blog', blog_id=blog.id))
+        data = form.data
+        title = data.get('title', '')
+        content = data.get('content', '')
+        content_type = data.get('content_type', '')
+
+        if not blog_id:
+            blog = BlogModel.create(title, content, content_type)
+            db.session.add(blog)
+            db.session.commit()
+        else:
+            blog = BlogModel.update(blog_id, title, content, content_type)
+
+        return dict(
+            ok=True,
+            redirect_url=url('heracles:www.blog', blog_id=blog.id)
+        )
