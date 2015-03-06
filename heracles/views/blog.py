@@ -61,6 +61,7 @@ class BlogEditView(MethodView):
             db.session.commit()
         else:
             blog = BlogModel.update(blog_id, title, content, content_type)
+            db.session.commit()
 
         return dict(
             ok=True,

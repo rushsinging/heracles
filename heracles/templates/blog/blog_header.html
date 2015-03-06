@@ -1,4 +1,5 @@
 <div class="header">
-    <h1><a href="{{ url_for('heracles:www.index') }}">Scripta</a></h1>
-    <h2>Simple and well designed Ghost theme.</h2>
+    {% set user = user_meta(request.ukey) %}
+    <h1><a href="{{ url_for('heracles:www.index') }}">{{ user.nickname}}</a></h1>
+    <h2>{{ user.title }}</h2>
 </div>

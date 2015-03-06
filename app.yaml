@@ -4,6 +4,8 @@ DEVELOPMENT: &dev
     APP_TYPE: 'app'
     APP_BASE: 'bottle'
     MODULE: 'heracles:app'
+    CLIENT_ID: 7131
+    CLIENT_SECRET: '55df5dde98eb34acb6b0b306a0b200fa'
     DEBUG: true
 
     CONTENT_PATH: 'templates/'

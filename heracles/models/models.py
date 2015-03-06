@@ -118,11 +118,14 @@ class BlogModel(db.Model, db.TableOpt):
 
         t = TextModel(
             content=content, hashkey=hashkey, content_type=content_type,
+            html=html,
         )
+
         if blog.text:
             t.parent_id = blog.text.id
 
         blog.text = t
+        blog.title = title
         return blog
 
 
